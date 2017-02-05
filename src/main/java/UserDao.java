@@ -1,10 +1,12 @@
+import java.util.List;
+
 /**
  * Created by Silver on 3.2.2017..
  */
 public interface UserDao {
-    public void fetchUser();
+    public User fetchUser(String id);
 
-    public void findUsers();
+    public List findUsers();
 
-    public void authenticateUser();
+    public boolean authenticateUser(String username, String password);
 }
