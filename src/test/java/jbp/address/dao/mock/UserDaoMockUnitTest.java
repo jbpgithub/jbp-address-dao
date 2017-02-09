@@ -48,7 +48,7 @@ public class UserDaoMockUnitTest {
         }
         //test username and password
         String testUsername = "marko";
-        String testPassword = "1243";
+        String testPassword = "123";
         if (!userDaoMock.authenticateUser(testUsername, testPassword)) {
             throw new IllegalStateException("Korisničko ime ili lozinka su pogrešni");
         }
