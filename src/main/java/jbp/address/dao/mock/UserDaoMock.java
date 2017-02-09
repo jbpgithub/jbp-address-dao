@@ -19,23 +19,40 @@ public class UserDaoMock implements UserDao {
 
     }
 
-    public UserDaoMock(List<User> users) {
-        this.users = users;
-    }
-
-
     //interface
     public User fetchUser(final String id) {
-
-
-        return null;
+        int testId = Integer.parseInt(id);
+        User testUser = null;
+        for(User user: findUsers()) {
+            if(testId == user.getId()) {
+                testUser = user;
+            }
+        }
+        return testUser;
     }
 
     public List<User> findUsers() {
         return users;
     }
 
+/*    public boolean authenticateUser(final String username, final String password) {
+        String testUsername = "marko";
+        String testPassword = "123";
+        boolean test = false;
+        if(testUsername.equals(username)&& testPassword.equals(password)) {
+            test = true;
+        }
+        return test;
+    }*/
+
     public boolean authenticateUser(final String username, final String password) {
-        return false;
+        boolean test = false;
+        User testUser = new User();
+        for(User user: findUsers()) {
+            if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                test = true;
+            }
+        }
+        return test;
     }
 }

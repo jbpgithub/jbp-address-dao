@@ -19,7 +19,7 @@
             <groupId>jbp.address</groupId>
             <artifactId>jbp-address-domain</artifactId>
             <version>${project.version}</version>
-            <scope>import</scope>
+
         </dependency>
     </dependencies>
 
