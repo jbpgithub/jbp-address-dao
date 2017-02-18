@@ -2,6 +2,7 @@ package jbp.address.dao;
 
 import jbp.address.domain.Person;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -11,7 +12,9 @@ public interface PersonDao {
 
     public Person fetchPerson(final String id);
 
-    public List<Person> findUsers();
+    public List<Person> findPersons();
 
-    //public boolean authenticateUser(final String username, final String password);
+    public String savePerson(final Person person) throws IOException;
+
+    public void deletePerson (final String id);
 }

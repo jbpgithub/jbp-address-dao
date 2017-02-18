@@ -20,19 +20,19 @@ public class UserDaoMock implements UserDao {
     }
 
     //interface
+    public List<User> findUsers() {
+        return users;
+    }
+
     public User fetchUser(final String id) {
         int testId = Integer.parseInt(id);
         User testUser = null;
-        for(User user: findUsers()) {
-            if(testId == user.getId()) {
+        for (User user : findUsers()) {
+            if (testId == user.getId()) {
                 testUser = user;
             }
         }
         return testUser;
-    }
-
-    public List<User> findUsers() {
-        return users;
     }
 
 /*    public boolean authenticateUser(final String username, final String password) {
@@ -47,9 +47,8 @@ public class UserDaoMock implements UserDao {
 
     public boolean authenticateUser(final String username, final String password) {
         boolean test = false;
-        User testUser = new User();
-        for(User user: findUsers()) {
-            if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+        for (User user : findUsers()) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 test = true;
             }
         }
