@@ -14,9 +14,7 @@ public class UserDaoMock implements UserDao {
     private List<User> users;
 
     public UserDaoMock() {
-
         this.users = new ArrayList<User>();
-
     }
 
     //interface
@@ -28,8 +26,16 @@ public class UserDaoMock implements UserDao {
         int testId = Integer.parseInt(id);
         User testUser = null;
         for (User user : findUsers()) {
-            if (testId == user.getId()) {
-                testUser = user;
+            if (0 >= user.getId() || null == user.getUsername() || null == user.getPassword()) {
+                throw new IllegalArgumentException("The user does not have all required data.");
+
+            } else {
+                if (testId == user.getId()) {
+                    testUser = user;
+                    break;
+                } else {
+                    throw new IllegalStateException("User with this ID is not on the list.");
+                }
             }
         }
         return testUser;
@@ -50,6 +56,9 @@ public class UserDaoMock implements UserDao {
         for (User user : findUsers()) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 test = true;
+                break;
+            } else {
+                throw new IllegalArgumentException("The username or password are incorrect");
             }
         }
         return test;

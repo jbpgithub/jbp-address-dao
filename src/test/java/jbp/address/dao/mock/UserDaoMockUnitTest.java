@@ -16,37 +16,38 @@ public class UserDaoMockUnitTest {
     }
 
     @Test
-    public void userDaoMock() {
-
-        User user0 = new User("marko", "123", Role.ADMIN);
-        user0.setId(1);
-        System.out.println(user0.getId());
-        User user1 = new User("ivan", "234", Role.NORMAL);
-        user1.setId(2);
-        User user2 = new User("pero", "789", Role.ADMIN);
-        user2.setId(3);
+    public void test_findUser() {
+        User user = new User("marko", "123", Role.ADMIN);
         UserDaoMock userDaoMock = new UserDaoMock();
-
-        if (0 == user0.getId() || null == user0.getUsername() || null == user0.getPassword()) {
-            throw new IllegalArgumentException("Korisnik nema sve potrebne podatke");
-        }
-        userDaoMock.findUsers().add(user0);
-        userDaoMock.findUsers().add(user1);
-        userDaoMock.findUsers().add(user2);
-
-        //test user0
-        String testId = "3";
-        if (null == userDaoMock.fetchUser(testId)) {
-            throw new IllegalStateException("Korisnika sa tim ID-om nema na popisu");
-        }
-        //test username and password
-        String testUsername = "marko";
-        String testPassword = "123";
-        if (!userDaoMock.authenticateUser(testUsername, testPassword)) {
-            throw new IllegalArgumentException("Korisničko ime ili lozinka su pogrešni");
+        userDaoMock.findUsers().add(user);
+        if(1 != userDaoMock.findUsers().size()) {
+            throw new IllegalStateException("Number of user in list is not expected size.");
         }
     }
 
+/*    @Test
+    public void test_UserIdSet() {
+        UserDaoMock userDaoMock = new UserDaoMock();
+        userDaoMock.findUsers().add(new User("marko", "123", null));
+        userDaoMock.findUsers().get(0).setId(1);
+        userDaoMock.fetchUser("1");
+    }*/
+
+    @Test
+    public void test_UserSet() {
+        UserDaoMock userDaoMock = new UserDaoMock();
+        userDaoMock.findUsers().add(new User("marko", "123", Role.ADMIN));
+        userDaoMock.findUsers().get(0).setId(1);
+        userDaoMock.fetchUser("1");
+    }
+
+    @Test
+    public void test_AuthenticateUser() {
+        UserDaoMock userDaoMock = new UserDaoMock();
+        userDaoMock.findUsers().add(new User("marko", "123", Role.ADMIN));
+        userDaoMock.findUsers().get(0).setId(1);
+        userDaoMock.authenticateUser("marko", "123");
+    }
 
     @After
     public void tearDown() throws Exception {

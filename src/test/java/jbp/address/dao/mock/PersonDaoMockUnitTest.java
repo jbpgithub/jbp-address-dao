@@ -47,22 +47,29 @@ public class PersonDaoMockUnitTest {
         PersonDaoMock daoPerson = new PersonDaoMock();
         daoPerson.savePerson(person);
         daoPerson.deletePerson("1");
-
-
     }
 
-    /*    @Test
-    public void test_idNotSet() throws IOException {
-        boolean notSet = false;
-        Person person = new Person(-1, "Ivan", "Ivić", null, null,null);
+    @Test
+    public void test_personDaoListSize() {
         PersonDaoMock daoPerson = new PersonDaoMock();
-        try {
-            daoPerson.savePerson(person);
-        } catch(IllegalArgumentException e) {
-            notSet = true;
+        daoPerson.savePerson(new Person(1, "Ivan", "Ivić", null, null, null));
+        daoPerson.savePerson(new Person(2, "Marko", null, null, null, null));
+        daoPerson.savePerson(new Person(3, null, "Perić", null, null, null));
+        daoPerson.deletePerson("1");
+        if(2 != daoPerson.findPersons().size()) {
+            throw new IllegalStateException("Number of person in list is not expected size.");
         }
-        if (!notSet) throw new IllegalStateException("Test has failed");
-    }*/
+    }
+
+    @Test
+    public void test_fechPersonData() {
+        Person person = new Person(1, "Ivan", "Ivić", null, null, null);
+        PersonDaoMock daoPerson = new PersonDaoMock();
+        daoPerson.savePerson(person);
+        if(!("Ivan").equals(daoPerson.fetchPerson("1").getFirstName())) {
+            throw new IllegalStateException("Error fetched person is not expected.");
+        }
+    }
 
     @After
     public void tearDown() throws Exception {
